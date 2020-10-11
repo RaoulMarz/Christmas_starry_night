@@ -1,0 +1,64 @@
+language: cpp
+git:
+  depth: 3
+dist: trusty
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-8
+    - rpm
+matrix:
+  include:
+  - os: linux
+    compiler: gcc
+    script:
+    - cmake . -Bbuild -DCMAKE_BUILD_TYPE=Release
+    - cmake --build build --config Release --target package
+  - os: windows
+    language: cpp
+    install:
+    - choco install nsis 7zip
+    script:
+    - cmake . -Bbuild
+    - cmake --build build --config Release --target package
+  - os: osx
+    osx_image: xcode9.1
+    script:
+    - cmake . -Bbuild -DCMAKE_BUILD_TYPE=Release
+    - cmake --build build --config Release --target package
+before_install:
+- |
+  if [[ $TRAVIS_OS_NAME == linux && "$CXX" = "g++" ]]; then
+      export CXX="g++-8" CC="gcc-8"
+  fi
+- |
+  if [[ $TRAVIS_OS_NAME == linux && "$CXX" = "clang++" ]]; then
+      export CXX="clang++-3.7" CC="clang-3.7";
+  fi
+- cmake --version
+script:
+- echo script
+after_failure:
+- pwd
+- find .
+- cat CMakeFiles/CMakeOutput.log
+- ls thirdparty
+- cat thirdparty/CMakeFiles/CMakeOutput.log
+branches:
+  only:
+  - /tag.*/
+  - master
+deploy:
+  provider: releases
+  api_key:
+    secure: nEruQvXi1cSFerv+LBIR1tjlVkBCWH+coMwY+14R1tITrA2NQsnxB1QuqLQ6Zx4HAZmOnUYUmjBvIzWSrsqNmwEM0S9uG0zUqwu5KwB1TwlOWtHesgORCMQhgfnTA7xLt7DPC6s//kpF0Ndu8it4DXX/cjxate+tIkvuVZgKUYnWylPeRmcPUorGTTDYI9hprjtC69ambIrAhqGtumXWVMkhpJsnSilpN8LCZEvCA9ScI9Sx58hY9cTbuAW4FMw0YdULeKqeTRgF+faOz6igfQjngJvgOatlBGkk1W8q8ZQ97/wB/tZtXRuptHaGIA82DkUQMaGFc+7t5Z7SMIpnuoSB0s9w8Foh1ukfH+reZiOnxkWDCQ5jET7TjsWcIf9VGENpSnfFhwPfC4CiIh4GKhpz4fXuOADeIgzpJapgpQ5IEVyPmRpi29hQZfn7G0hjCz9c6537jDS3kp/x2KBgzxMJuDhWSEVdqquIS1B+zjb8mDGaAugjLumS9I4SIZr9vqkqICoPO12uTS91Lql70FjwAhhiLGq/B4RAxAcsA/iiobUEQZgjtPEUtzyQEvELf0GF/ORjSo40hiEeLPGU5fKGBi5LEBU973ZTbc7UVO42MP4043Nf/8JdDrMuXpmTpijqViclbC+a24GZgrRjD1YS9Q6aoKVThoG9om6h6bQ=
+  file_glob: true
+  file: build/mypackage*
+  skip_cleanup: true
+  overwrite: true
+  draft: true
+  on:
+    repo: tesch1/SDL2-cmake-example
+    tags: true

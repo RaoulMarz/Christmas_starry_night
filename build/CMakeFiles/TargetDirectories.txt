@@ -1,0 +1,3 @@
+/home/raoulmarais/NetBeansProjects/Christmas_starry_night/build/CMakeFiles/rebuild_cache.dir
+/home/raoulmarais/NetBeansProjects/Christmas_starry_night/build/CMakeFiles/edit_cache.dir
+/home/raoulmarais/NetBeansProjects/Christmas_starry_night/build/CMakeFiles/christmas_stars.dir

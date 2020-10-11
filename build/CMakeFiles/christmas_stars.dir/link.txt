@@ -1,0 +1,1 @@
+/usr/lib64/ccache/c++ CMakeFiles/christmas_stars.dir/main.cpp.o -o christmas_stars  ../vsgl/vsgl2.cpp /usr/lib64/libSDL2_image.so /usr/lib64/libSDL2_ttf.so /usr/lib64/libSDL2_mixer.so /usr/lib64/libSDL2.so -lpthread 

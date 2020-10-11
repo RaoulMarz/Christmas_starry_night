@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../vsgl/vsgl2.h
+string
+-
+sstream
+-
+SDL2/SDL.h
+-
+SDL2/SDL_net.h
+-
+SDL2/SDL_image.h
+-
+SDL2/SDL_mixer.h
+-
+SDL2/SDL_ttf.h
+-
+vsgl2_keycode.h
+../vsgl/vsgl2_keycode.h
+
+../vsgl/vsgl2_keycode.h
+
+/home/raoulmarais/NetBeansProjects/Christmas_starry_night/main.cpp
+iostream
+-
+ctime
+-
+vector
+-
+vsgl2.h
+/home/raoulmarais/NetBeansProjects/Christmas_starry_night/vsgl2.h
+
